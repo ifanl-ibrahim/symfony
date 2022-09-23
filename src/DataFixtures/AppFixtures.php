@@ -2,7 +2,10 @@
 
 namespace App\DataFixtures;
 
+use DateTimeImmutable;
 use App\Entity\Users;
+use App\Entity\Articles;
+use App\Entity\Comments;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -22,6 +25,20 @@ class AppFixtures extends Fixture
             $user->setFirstname($this->faker->firstName());
             $user->setLastname($this->faker->lastName());
             $manager->persist($user);
+
+            $article = new Articles();
+            $article->setTitle($this->faker->title());
+            $article->setContent($this->faker->text());
+            $article->setCreatedAt(DateTimeImmutable::createFromMutable($this->faker->dateTime()));
+            $article->setAuthor($user);
+            $manager->persist($article);
+
+            $comment = new Comments();
+            $comment->setContent($this->faker->text());
+            $comment->setCreatedAt(DateTimeImmutable::createFromMutable($this->faker->dateTime()));
+            $comment->setArticleId($article);
+            $manager->persist($comment);
+
             $manager->flush();
         }
     }

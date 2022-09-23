@@ -39,6 +39,18 @@ class ArticlesRepository extends ServiceEntityRepository
         }
     }
 
+    public function findForPagination(int $page, int $limit): array
+    {
+        $offset = ($page - 1) * $limit;
+
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.id', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Articles[] Returns an array of Articles objects
 //     */
