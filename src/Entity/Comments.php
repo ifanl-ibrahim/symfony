@@ -53,14 +53,14 @@ class Comments
         return $this;
     }
 
-    public function getArticleId(): ?Articles
+    public function getArticle(): ?Articles
     {
-        return $this->article_id;
+        return $this->article;
     }
 
-    public function setArticleId(?Articles $article_id): self
+    public function setArticle(?Articles $article): self
     {
-        $this->article_id = $article_id;
+        $this->article = $article;
 
         return $this;
     }

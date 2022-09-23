@@ -36,7 +36,7 @@ class AppFixtures extends Fixture
             $comment = new Comments();
             $comment->setContent($this->faker->text());
             $comment->setCreatedAt(DateTimeImmutable::createFromMutable($this->faker->dateTime()));
-            $comment->setArticleId($article);
+            $comment->setArticle($article);
             $manager->persist($comment);
 
             $manager->flush();
